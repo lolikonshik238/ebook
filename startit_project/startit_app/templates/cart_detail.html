@@ -1,0 +1,68 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Document</title>
+        <link rel="stylesheet" href="{% static 'css/style.css' %}">
+        <link href="https://cdn.jsdelivr.net/npm/remixicon@2.5.0/fonts/remixicon.css" rel="stylesheet">
+
+        <!--=============== SWIPER CSS ===============-->
+        <link rel="stylesheet" href="{% static 'css/swiper-bundle.min.css' %}">
+
+        
+    </head>
+
+    <body>
+        <!--==================== HEADER ====================-->
+        {% include 'rashirenieshablona.html' %}
+
+<!-- ===============CATALOG================= -->
+
+<main>
+    <div class="book-container2">
+        {% for basket in baskets %}
+        <div class="book-card2">
+            
+                <a href="{% url 'book_detail' basket.book.pk %}">
+                        <img src="{{basket.book.cover_image.url }}" alt="">
+                    </a>
+
+                    <div class="book-details2">
+                        <h3><a href="{{basket.book.title }}">{{ book.title }}</a></h3>
+                        <p>{{ book.author }}</p>
+                        <p>Количество: {{basket.quantity}}</p>
+                        <p class="price">Общая сумма: {{ basket.sum }} ₽</p>
+                        {% if book.discount %}
+                            <p class="discount">-{{ book.discount }}%</p>
+                        {% endif %}
+                    </div>
+                    
+                    <a href="">
+                        <button class="cart-btn button" >Оплатить</button>
+                    </a>
+                    
+                    <a href="{% url 'basket_delete' id=basket.id %}">
+                        <button class="button cart-btn">
+                            Удалить из корзины
+                        </button>
+                    </a>  
+        </div>  
+        {% if forloop.counter|divisibleby:4 and not forloop.last %}
+            </div><div class="book-container2"> <!-- Закрываем и открываем новый контейнер -->
+        {% endif %}
+        {% endfor %}    
+    </div>
+</main>
+
+    
+
+
+      <script src="{%static 'js/main.js'%}"></script>
+
+      
+    </body>
+</html>

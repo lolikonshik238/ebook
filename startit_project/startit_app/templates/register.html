@@ -1,0 +1,29 @@
+<!-- register.html -->
+{% load static %}
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/remixicon/3.5.0/remixicon.css">
+
+    <!--=============== SWIPER CSS ===============-->
+    <link rel="stylesheet" href="{% static 'css/swiper-bundle.min.css' %}">
+
+    
+</head>
+
+
+<div class="register grid">
+    <form method="post" action="{% url 'register' %}" class="login__form grid">
+        {% csrf_token %}
+        <h3 class="login__title">Register</h3>
+
+        {{ form.non_field_errors }}
+
+        {{ form.as_p }}
+
+        <button type="submit" class="login__button button">Register</button>
+    </form>
+</div>

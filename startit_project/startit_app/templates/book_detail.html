@@ -1,0 +1,139 @@
+<!-- <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ book.title }}</title>
+</head>
+<body>
+    <h1>{{ book.title }}</h1>
+    <p>Автор: {{ book.author }}</p>
+    <p>Дата публикации: {{ book.year }}</p>
+    <p>ISBN: {{ book.summary }}</p>
+    Проверяем, есть ли изображение, и выводим его
+    {% if book.cover_image %}
+        <img src="{{ book.cover_image.url }}" alt="{{ book.title }}">
+    {% else %}
+        <p>Обложка не доступна.</p>
+    {% endif %}
+</body>
+</html> -->
+
+
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Document</title>
+        <link rel="stylesheet" href="{% static 'css/style.css' %}">
+        <link href="https://cdn.jsdelivr.net/npm/remixicon@2.5.0/fonts/remixicon.css" rel="stylesheet">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/remixicon/3.5.0/remixicon.css">
+
+        <!--=============== SWIPER CSS ===============-->
+        <link rel="stylesheet" href="{% static 'css/swiper-bundle.min.css' %}">
+
+        
+    </head>
+
+    <body>
+        <!--==================== HEADER ====================-->
+        {% include 'rashirenieshablona.html' %}
+
+<!-- ===============BOOK INFO================= -->
+
+
+    <main>
+        <section>
+            <div class="container__info">
+                <div class="book">
+                    {% if book.cover_image %}
+                        <img src="{{ book.cover_image.url }}" alt="{{ book.title }}">
+                    {% else %}
+                        <p>Обложка не доступна.</p>
+                    {% endif %}
+                </div>
+                <div class="info">
+                    <h2>{{ book.title }}</h2>
+                    <p class="section-title">О товаре</p>
+                    
+                    <p>Жанр: {{ book.genre }}</p>
+                    <div class="characteristics">
+                        
+                        <ul>
+                            <li><strong>Автор: {{ book.author }}</strong> </li>
+                            <li><strong>Раздел:</strong> {{ book.razdel }}</li>
+                            <li><strong>Издательство:</strong> {{ book.izdatelstvo }}</li>
+                            <li><strong>ISBN: {{ book.summary }}</strong> </li>
+                            <li><strong>Год издания: {{ book.year }}</strong> </li>
+                        </ul>
+                    </div>
+                    <a href="{% url 'basket_add' book.id %}">
+                        <button class="button">
+                            <i class="ri-shopping-basket-line"></i>
+                            В корзину
+                        </button>
+
+                    </a>
+                
+                    
+                    <a href="{% url 'favorite_add' book.id %}">
+                        <button class="button">
+                            <i class="ri-heart-line"></i>
+                            В избранное
+                        </button>
+
+                    </a>
+
+                    
+                        
+
+                
+                </div>
+
+                
+            </div>
+
+            
+        </section>
+
+        <div class="opisanie">
+            <h1>О товаре</h1>
+            <div>
+                <p>{{book.description}}</p>
+                
+            </div>
+    
+            <h2 style="    
+            margin-bottom: 10px;
+            padding-top: 10px;">
+            Характеристики</h2>
+            <div class="details">
+                <div><span>Автор:</span> {{ book.author }}</div>
+                <div><span>Год издания:</span> {{ book.year }}</div>
+                <div><span>Раздел:</span> {{ book.razdel }}</div>
+                <div><span>Количество страниц:</span> {{ book.kolvostranits }}</div>
+                <div><span>Издательство:</span> {{ book.izdatelstvo }}</div>
+                <div><span>Переплет:</span> {{ book.pereplet }}</div>
+                <div><span>ISBN:</span> {{ book.summary }}</div>
+                <div><span>Формат:</span> {{ book.formatK }}</div>
+                <div><span>Вес:</span> {{ book.ves }}</div>
+            </div>
+        </div>
+    </main>
+
+
+
+
+      <script src="{%static 'js/main.js'%}"></script>
+
+      <!--=============== SWIPER JS ===============-->
+      <script src="./assets/js/swiper-bundle.min.js"></script>
+
+      <script src="./assets/js/scrollreveal.min.js"></script>
+    </body>
+</html>
+

@@ -1,0 +1,79 @@
+
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Document</title>
+        <link rel="stylesheet" href="{% static 'css/style.css' %}">
+        <link href="https://cdn.jsdelivr.net/npm/remixicon@2.5.0/fonts/remixicon.css" rel="stylesheet">
+
+        <!--=============== SWIPER CSS ===============-->
+        <link rel="stylesheet" href="{% static 'css/swiper-bundle.min.css' %}">
+
+        
+    </head>
+
+<body>
+    
+    <!--==================== HEADER ====================-->
+    {% include 'rashirenieshablona.html' %}
+
+<!-- ===============CATALOG================= -->
+
+<main>
+    <!-- Список жанров для фильтрации -->
+    <!-- <nav class="genre-filter">
+        <ul>
+            <li><a href="{% url 'catalog' %}">Все жанры</a></li>
+            {% for genre in genres %}
+                <li><a href="{% url 'catalog' %}?genre={{ genre }}">{{ genre }}</a></li>
+            {% endfor %}
+        </ul>
+    </nav> -->
+    <div class="book-container2">
+        {% for book in books %}
+    <div class="book-card2">
+        {% if book.cover_image %}
+            <a href="{% url 'book_detail' book.pk %}">
+                <img src="{{ book.cover_image.url }}" alt="{{ book.title }}">
+            </a>
+        {% else %}
+            <p>Обложка не доступна.</p>
+        {% endif %}
+        <div class="book-details2">
+            <h3><a href="{% url 'book_detail' book.pk %}">{{ book.title }}</a></h3>
+            <p>{{ book.author }}</p>
+            <p class="price">{{ book.price }} ₽</p>
+            {% if book.discount %}
+                <p class="discount">-{{ book.discount }}%</p>
+            {% endif %}
+        </div>
+        <a href="{% url 'basket_add' book.id %}">
+            <button class="cart-btn button">
+                <i class="ri-shopping-basket-line"></i>
+                В Корзину
+            </button>
+
+        </a>
+
+    </div>
+    
+    {% if forloop.counter|divisibleby:4 and not forloop.last %}
+        </div><div class="book-container2"> <!-- Закрываем и открываем новый контейнер -->
+    {% endif %}
+    {% endfor %}
+    </div>
+</main>
+
+    
+
+
+      <script src="{%static 'js/main.js'%}"></script>
+
+      
+    </body>
+</html>

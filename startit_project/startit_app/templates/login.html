@@ -1,0 +1,28 @@
+{% load static %}
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/remixicon/3.5.0/remixicon.css">
+
+    <!--=============== SWIPER CSS ===============-->
+    <link rel="stylesheet" href="{% static 'css/swiper-bundle.min.css' %}">
+
+    
+</head>
+
+
+
+{% if error %}
+    <div class="error">{{ error }}</div>
+{% endif %}
+
+
+<h2 class="login__title">Login</h2>
+<form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit" class="login__button button">Login</button>
+</form>

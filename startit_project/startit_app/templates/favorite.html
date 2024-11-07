@@ -1,0 +1,62 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Document</title>
+        <link rel="stylesheet" href="{% static 'css/style.css' %}">
+        <link href="https://cdn.jsdelivr.net/npm/remixicon@2.5.0/fonts/remixicon.css" rel="stylesheet">
+
+        <!--=============== SWIPER CSS ===============-->
+        <link rel="stylesheet" href="{% static 'css/swiper-bundle.min.css' %}">
+
+        
+    </head>
+
+    <body>
+        <!--==================== HEADER ====================-->
+        <!-- {% include 'rashirenieshablona.html' %} -->
+
+<!-- ===============CATALOG================= -->
+
+<main>
+    <div class="book-container2">
+        {% for favorite in favorites %}
+        <div class="book-card2">
+            
+                    <a href="{% url 'book_detail' favorite.book.id %}">
+                        <img src="{{favorite.book.cover_image.url }}" alt="">
+                    </a>
+
+                    <div class="book-details2">
+                        <h3><a href="{{favorite.book.title }}">{{ favorite.book.title }}</a></h3>
+                        <p>{{ favorite.book.author }}</p>
+                        
+                        {% if book.discount %}
+                            <p class="discount">-{{ favorite.book.discount }}%</p>
+                        {% endif %}
+                    </div>
+                    
+                    <a href="{% url 'favorite_add' favorite.id %}"><button class="cart-btn button">В корзину</button></a>
+
+                    <a href="{% url 'favorite_delete' favorite.id %}"><button class="cart-btn button" >Удалить из избранного</button></a>
+                           
+        </div>  
+        {% if forloop.counter|divisibleby:4 and not forloop.last %}
+            </div><div class="book-container2"> <!-- Закрываем и открываем новый контейнер -->
+        {% endif %}
+        {% endfor %}    
+    </div>
+</main>
+
+<!-- {% include 'footer.html' %} -->
+
+
+      <script src="{%static 'js/main.js'%}"></script>
+
+      
+    </body>
+</html>
